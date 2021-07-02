@@ -1,8 +1,8 @@
 {
-  "name": "mid",
+  "name": "shophere",
   "version": "1.0.0",
-  "description": "Medical Identification Record",
-  "author": "Mid",
+  "description": "An e-commerce site",
+  "author": "",
   "private": true,
   "scripts": {
     "dev": "nuxt",
@@ -24,5 +24,5 @@
     "@nuxt/typescript-build": "^2.1.0",
     "@nuxtjs/vuetify": "^1.11.3"
   },
-  "keywords": ["mid", "medical", "record", "identification"]
+  "keywords": ["shophere", "e-commerce", "shop", "store"]
 }
