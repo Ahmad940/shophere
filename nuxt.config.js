@@ -48,7 +48,7 @@ export default {
   // global router config
   router: {
     // Run the middleware/user-agent.js on every page
-    middleware: 'auth'
+    // middleware: 'auth'
   },
 
   env: {

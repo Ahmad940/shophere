@@ -73,12 +73,12 @@ export default {
         {
           icon: 'mdi-apps',
           title: 'Home',
-          to: '/app/dashboard'
+          to: 'dashboard'
         },
         {
           icon: 'mdi-chart-bubble',
-          title: 'Patients',
-          to: '/app/patients'
+          title: 'Products',
+          to: 'products'
         },
         {
           icon: 'mdi-chart-bubble',

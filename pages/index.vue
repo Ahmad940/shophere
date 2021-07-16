@@ -66,7 +66,7 @@
           <v-btn
             color="primary"
             nuxt
-            to="/app"
+            to="/dashboard"
           >
             Continue
           </v-btn>
