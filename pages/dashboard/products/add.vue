@@ -1,13 +1,13 @@
 <template>
   <v-container>
-    <p>Product page</p>
+    Add
   </v-container>
 </template>
 
 <script>
 export default {
-  name: "index",
-  layout: 'dashboard',
+  name: "add",
+  layout: "dashboard"
 }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <p>Product page</p>
+    <p>Images pages (Crud)</p>
   </v-container>
 </template>
 

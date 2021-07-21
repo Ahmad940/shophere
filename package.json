@@ -14,15 +14,22 @@
     "@nuxtjs/auth-next": "5.0.0-1622718665.cc99959",
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/pwa": "^3.3.5",
-    "add": "2.0.6",
+    "add": "^2.0.6",
     "core-js": "^3.9.1",
     "nuxt": "^2.15.3",
-    "yarn": "1.22.10"
+    "nuxt-property-decorator": "^2.9.1",
+    "yarn": "^1.22.10"
   },
   "devDependencies": {
     "@nuxt/types": "^2.15.3",
     "@nuxt/typescript-build": "^2.1.0",
-    "@nuxtjs/vuetify": "^1.11.3"
+    "@nuxtjs/vuetify": "^1.11.3",
+    "vuex-module-decorators": "^1.0.1"
   },
-  "keywords": ["shophere", "e-commerce", "shop", "store"]
+  "keywords": [
+    "shophere",
+    "e-commerce",
+    "shop",
+    "store"
+  ]
 }

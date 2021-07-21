@@ -1,11 +1,12 @@
 <template>
-  <v-row align="center" style="height: 100vh;">
+  <v-row align="center" style="height: 100vh">
     <v-col align="center">
-      <v-card class="pa-5 text-center" raised max-width="380" shaped>
+      <v-card class="pa-5 text-center fade" raised max-width="380" shaped>
         <div class="ma-10">
           <v-avatar color="primary">
-            <v-icon>mdi-lock</v-icon>
+            <v-icon color="white">mdi-lock</v-icon>
           </v-avatar>
+          <v-card-title class="d-flex justify-center">Sign In</v-card-title>
         </div>
 
         <v-alert
@@ -20,6 +21,7 @@
         <v-form
           ref="form"
           v-model="valid"
+          lazy-validation
         >
           <v-text-field
             name="email"
@@ -29,6 +31,7 @@
             label="Email"
             :rules="[required, emailRules]"
             outlined
+            dense
             rounded
             placeholder="Email Address"
             append-icon='mdi-email'
@@ -37,6 +40,7 @@
 
           <v-text-field
             outlined
+            dense
             rounded
             aria-label="password"
             v-model="form_data.password"
@@ -53,6 +57,7 @@
           <v-btn
             @click.prevent="userLogin"
             rounded
+            color="primary"
             block
             :loading="loading"
             :disabled="!valid"
@@ -111,16 +116,18 @@ export default {
   },
   methods: {
     async userLogin() {
+      if (!this.$refs.form.validate()) return;
+
       this.loading = true
       this.error = false
       this.error_message = ''
 
+      // making api call for login
       try {
         let response = await this.$auth.loginWith('local', {data: this.form_data})
-        console.log(response)
+        // console.log(response)
         this.loading = false
       } catch (err) {
-        console.log(err.response.data)
         this.error = true
         this.error_message = err.response.data.message
         this.loading = false
@@ -130,10 +137,20 @@ export default {
   layout: "auth",
   head: {
     title: 'Login'
-  },
+  },ij
   middleware: 'islogged_redirect'
 }
 </script>
 
 <style scoped>
+  .bg {
+    background: url("/images/authbackground.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+  .fade{
+    opacity: 0.9;
+  }
 </style>
