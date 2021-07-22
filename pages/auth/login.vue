@@ -96,61 +96,57 @@
 
 <script>
 import rules from "../../mixins/rules";
+import {Component, Vue} from 'nuxt-property-decorator'
 
-export default {
-  name: "login",
-  mixins: [rules],
-  data() {
-    return {
-      valid: false,
-      loading: false,
-      error: false,
-      error_message: '',
-      form_data: {
-        email: '',
-        password: '',
-      },
-      show_password: false,
-      textStyle: {'black--text': !this.$vuetify.theme.dark, 'white--text': this.$vuetify.theme.dark,},
-    }
-  },
-  methods: {
-    async userLogin() {
-      if (!this.$refs.form.validate()) return;
-
-      this.loading = true
-      this.error = false
-      this.error_message = ''
-
-      // making api call for login
-      try {
-        let response = await this.$auth.loginWith('local', {data: this.form_data})
-        // console.log(response)
-        this.loading = false
-      } catch (err) {
-        this.error = true
-        this.error_message = err.response.data.message
-        this.loading = false
-      }
-    }
-  },
-  layout: "auth",
+@Component({
   head: {
     title: 'Login'
-  },ij
-  middleware: 'islogged_redirect'
+  },
+  layout: "auth",
+  mixins: [rules],
+})
+export default class extends Vue {
+  valid = false
+  loading = false
+  error = false
+  error_message = ''
+  form_data = {
+    email: '',
+    password: '',
+  }
+  textStyle= {'black--text': !this.$vuetify.theme.dark, 'white--text': this.$vuetify.theme.dark,}
+
+  async userLogin() {
+    if (!this.$refs.form.validate()) return;
+
+    this.loading = true
+    this.error = false
+    this.error_message = ''
+
+    // making api call for login
+    try {
+      let response = await this.$auth.loginWith('local', {data: this.form_data})
+      // console.log(response)
+      this.loading = false
+    } catch (err) {
+      this.error = true
+      this.error_message = err.response.data.message
+      this.loading = false
+    }
+  }
 }
 </script>
 
 <style scoped>
-  .bg {
-    background: url("/images/authbackground.jpg") no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-  }
-  .fade{
-    opacity: 0.9;
-  }
+.bg {
+  background: url("/images/authbackground.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.fade {
+  opacity: 0.9;
+}
 </style>
