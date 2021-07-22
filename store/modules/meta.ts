@@ -11,7 +11,8 @@ export default class MetaModule extends VuexModule {
   appname?: string = "Shop Here"
   darkMode?: boolean = false
   drawer?: boolean = false
-  primaryColor: string = "blue"
+  // primaryColor: string = "black"
+  primaryColor: string = "#000080"
   secondaryColor: string = "orange"
   navTextColor: string = "white"
 
