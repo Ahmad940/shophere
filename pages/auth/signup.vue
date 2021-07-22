@@ -3,7 +3,7 @@
     <v-col align="center">
       <v-card class="pa-5 text-center fade" raised max-width="800" shaped>
         <div class="ma-10">
-          <v-avatar color="primary">
+          <v-avatar color="orange">
             <v-icon color="white">mdi-lock</v-icon>
           </v-avatar>
 
@@ -199,7 +199,7 @@
 
           <v-btn
             @click.prevent="signupHandler"
-            color="primary"
+            color="orange"
             rounded
             block
             :loading="loading"
@@ -234,6 +234,7 @@
 <script lang="ts">
 import rules from "../../mixins/rules";
 import {Component, Vue} from 'nuxt-property-decorator'
+import { Report, Notify } from "notiflix"
 
 @Component({
   head: {
@@ -245,26 +246,26 @@ import {Component, Vue} from 'nuxt-property-decorator'
   middleware: 'islogged_redirect',
 })
 export default class Signup extends Vue {
-  valid= false
-  loading= false
-  error= false
-  error_message= ''
-  tos= false
-  gender  = ['male', 'female']
+  valid = false
+  loading = false
+  error = false
+  error_message = ''
+  tos = false
+  gender = ['male', 'female']
   modal = false
-  form_data= {
+  form_data = {
     firstName: '',
     lastName: '',
     gender: '',
-    dob : null,
+    dob: null,
     phone: '',
     email: '',
     password: '',
     password1: '',
   }
-  show_password= false
-  show_password1=  false
-  textStyle= {'black--text': !this.$vuetify.theme.dark, 'white--text': this.$vuetify.theme.dark,}
+  show_password = false
+  show_password1 = false
+  textStyle = {'black--text': !this.$vuetify.theme.dark, 'white--text': this.$vuetify.theme.dark,}
 
 
   $refs!: {
@@ -287,6 +288,10 @@ export default class Signup extends Vue {
         this.loading = false
 
         this.$router.push('/')
+
+        Report.success(
+          'Success',
+          '"Your account was successfully created', 'Ok');
       })
       .catch((err) => {
         this.error = true

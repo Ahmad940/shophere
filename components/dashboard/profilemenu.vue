@@ -86,7 +86,7 @@ export default class ProfileMenu extends Vue {
 
   get fullName() {
     const { firstName, lastName } = this.user
-    return `${firstName} ${lastName}`
+    return `${firstName} ${lastName!}`
   }
 }
 

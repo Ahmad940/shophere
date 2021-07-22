@@ -3,7 +3,7 @@
     <v-col align="center">
       <v-card class="pa-5 text-center fade" raised max-width="380" shaped>
         <div class="ma-10">
-          <v-avatar color="primary">
+          <v-avatar color="orange">
             <v-icon color="white">mdi-lock</v-icon>
           </v-avatar>
           <v-card-title class="d-flex justify-center">Sign In</v-card-title>
@@ -57,7 +57,7 @@
           <v-btn
             @click.prevent="userLogin"
             rounded
-            color="primary"
+            color="orange"
             block
             :loading="loading"
             :disabled="!valid"
@@ -97,6 +97,7 @@
 <script lang="ts">
 import rules from "../../mixins/rules";
 import {Component, Vue} from 'nuxt-property-decorator'
+import { Notify } from 'notiflix'
 
 @Component({
   head: {
@@ -110,6 +111,7 @@ export default class Login extends Vue {
   loading = false
   error = false
   error_message = ''
+  show_password = false
   form_data = {
     email: '',
     password: '',
@@ -132,10 +134,16 @@ export default class Login extends Vue {
       let response = await this.$auth.loginWith('local', {data: this.form_data})
       // console.log(response)
       this.loading = false
+      Notify.success('Login successful', {
+        timeout: 1000
+      });
     } catch (err) {
       this.error = true
       this.error_message = err.response.data.message
       this.loading = false
+      Notify.failure('Login not successful', {
+        timeout: 1000
+      })
     }
   }
 }

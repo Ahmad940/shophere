@@ -5569,6 +5569,11 @@ normalize-url@^6.0.1:
   resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-6.0.1.tgz#a4f27f58cf8c7b287b440b8a8201f42d0b00d256"
   integrity sha512-VU4pzAuh7Kip71XEmO9aNREYAdMHFGTVj/i+CaTImS8x0i1d3jUZkXhqluy/PRgjPLMgsLQulYY3PJ/aSbSjpQ==
 
+notiflix@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/notiflix/-/notiflix-3.0.1.tgz#da4a0f6c371eb9e08bd9643f4984f7af6e842f14"
+  integrity sha512-KdipbFspL2AgqsrWQAdvaK5Bl3/LoKojVqrsex3a+Vkz5ZMN2bWQtsDJp0UWFzL/7w/ykK8JmRFH8W4uTh3ddw==
+
 npm-run-path@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/npm-run-path/-/npm-run-path-4.0.1.tgz#b7ecd1e5ed53da8e37a55e1c2269e0b97ed748ea"

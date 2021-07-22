@@ -29,6 +29,7 @@
       "@types/node",
       "@nuxtjs/auth-next",
       "vuetify",
+      "notiflix"
     ]
   },
   "exclude": [
