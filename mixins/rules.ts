@@ -9,7 +9,8 @@ import {Vue, Component} from "nuxt-property-decorator";
       min: (v: string) => v.length >= 8 || 'Min 8 characters',
       emailRules: (v: string) => /.+@.+\..+/.test(v) || 'Invalid e-mail',
       phoneValidation: (v: any) => v?.length === 11 || 'Number must be 11 digits',
-      passwordMatch: (value: string, password: string) => value === password || 'Password does not match'
+      passwordMatch: (value: string, password: string) => value === password || 'Password does not match',
+      genderRule: (value: string) => (value == 'male' || value == 'female') || 'Gender must selected'
     }
   }
 })

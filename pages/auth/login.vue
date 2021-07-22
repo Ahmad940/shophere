@@ -94,7 +94,7 @@
   </v-row>
 </template>
 
-<script>
+<script lang="ts">
 import rules from "../../mixins/rules";
 import {Component, Vue} from 'nuxt-property-decorator'
 
@@ -105,7 +105,7 @@ import {Component, Vue} from 'nuxt-property-decorator'
   layout: "auth",
   mixins: [rules],
 })
-export default class extends Vue {
+export default class Login extends Vue {
   valid = false
   loading = false
   error = false
@@ -115,6 +115,10 @@ export default class extends Vue {
     password: '',
   }
   textStyle= {'black--text': !this.$vuetify.theme.dark, 'white--text': this.$vuetify.theme.dark,}
+
+  $refs!: {
+    form: HTMLFormElement
+  }
 
   async userLogin() {
     if (!this.$refs.form.validate()) return;
