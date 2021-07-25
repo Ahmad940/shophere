@@ -1,6 +1,6 @@
 <template>
   <v-app-bar app clipped-left fixed :color="secondaryColor" class="white--text">
-    <v-app-bar-nav-icon class="white--text" />
+    <v-app-bar-nav-icon @click="UPDATE_DRAWER" class="white--text" />
 <!--    <v-app-bar-title v-text="appname"></v-app-bar-title>-->
     <v-app-bar-title>{{ appname }}</v-app-bar-title>
     <v-spacer />
@@ -30,6 +30,9 @@ export default class extends Vue {
 
   @metaStore.State
   public appname!: string
+
+  @metaStore.Mutation
+  UPDATE_DRAWER!: void
 }
 </script>
 

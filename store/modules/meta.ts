@@ -1,11 +1,13 @@
 import {Action, Module, Mutation, VuexModule} from "vuex-module-decorators";
 import { Store } from 'vuex'
-import * as mystore from '../index'
+import * as store from '../index'
 
 @Module({
   name: 'meta',
   stateFactory: true,
   namespaced: true,
+  dynamic: true,
+  store: new Store(store.default)
 })
 export default class MetaModule extends VuexModule {
   appname?: string = "Shop Here"
@@ -16,17 +18,9 @@ export default class MetaModule extends VuexModule {
   secondaryColor: string = "orange"
   navTextColor: string = "white"
 
-  get draw() {
-    return this.drawer
-  }
-
   @Mutation
   UPDATE_DRAWER() {
     this.drawer = !this.drawer
   }
 
-  @Action
-  updateDrawer() {
-    this.drawer = !this.drawer
-  }
 }

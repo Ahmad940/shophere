@@ -13,11 +13,15 @@ export default class CategoryModule extends VuexModule {
   loading?: boolean
 
   @Mutation
-  UPDATE_CATEGORY(payload: object) {
+  ADD_CATEGORY(payload: object) {
     this.categories?.push(payload)
   }
 
-  @Action
+  SET_CATEGORY(payload: Array<object>) {
+    this.categories = payload
+  }
+
+  @Action({commit: 'SET_CATEGORY'})
   async fetchCategories() {
     this.loading = true
     try {

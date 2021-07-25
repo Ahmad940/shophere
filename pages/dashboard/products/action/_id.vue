@@ -3,7 +3,7 @@
     <v-row>
 
       <!--   Products from   -->
-      <v-col sm="12" md="8" cols="12">
+      <v-col sm="12" md="9" cols="12">
         <v-card class="pa-5">
 
           <v-card-text>
@@ -117,10 +117,83 @@
       <!--   Products from   -->
 
       <!--   Quick actions   -->
-      <v-col sm="12" md="4" cols="12">
+      <v-col sm="12" md="3" cols="12">
         <v-card class="">
           <v-card-text>
             Quick actions
+
+            <v-dialog
+              v-model="dialogUpdate"
+              max-width="500px"
+              persistent
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  v-bind="attrs"
+                  v-on="on"
+                  class="mt-5"
+                  :color="primaryColor"
+                  small
+                  text
+                >
+                  Add Category
+                </v-btn>
+              </template>
+              <v-card>
+                <v-card-title class="text-h5 orange white--text">
+                  Add category
+                </v-card-title>
+
+                <v-card-text>
+                  <v-container>
+                    <v-form ref="cForm" lazy-validation class="mt-5">
+                      <v-row>
+                        <v-col
+                          cols="12"
+                          sm="12"
+                        >
+                          <v-text-field
+                            v-model="editedCategory.name"
+                            label="Name"
+                            :rules="[fieldRequired]"
+                            dense
+                          ></v-text-field>
+                        </v-col>
+
+                        <v-col
+                          cols="12"
+                          sm="12"
+                        >
+                          <v-text-field
+                            v-model="editedCategory.description"
+                            label="Description"
+                            dense
+                          ></v-text-field>
+                        </v-col>
+                      </v-row>
+                    </v-form>
+                  </v-container>
+                </v-card-text>
+
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="closeCategoryDialog"
+                  >
+                    Cancel
+                  </v-btn>
+                  <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="saveCategoryDialog"
+                  >
+                    Save
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
           </v-card-text>
         </v-card>
       </v-col>
@@ -146,6 +219,7 @@ export default class EditProductPage extends Vue {
   productId = this.$route.params.id
   valid = false
   categories = []
+  dialogUpdate = false
   categoryLoading = false
   product = {
     name: '',
@@ -160,29 +234,54 @@ export default class EditProductPage extends Vue {
     },
   }
 
-  get formTitle(): string {
-    return !this.productId ? "Add Product" : "Edit Product"
-  }
-
-  defaultCategory = {
-    id: '',
-    name: '',
-    description: '',
-  }
-
-
   @meta.State
   secondaryColor!: string;
 
   @meta.State
   primaryColor!: string;
 
+  get formTitle(): string {
+    return !this.productId ? "Add Product" : "Edit Product"
+  }
+
+  editedCategory = {
+    name: '',
+    description: '',
+  }
+
+
   $refs!: {
     form: HTMLFormElement
+    cForm: HTMLFormElement
   }
 
   async discard() {
     this.$router.back()
+  }
+
+  async saveCategoryDialog() {
+    if (!this.$refs.cForm.validate()) return;
+
+    this.$nextTick(async () => {
+
+      try {
+        const category = await this.$axios.post('/categories', this.editedCategory)
+        this.editedCategory.name = ''
+        this.editedCategory.description = ''
+        await this.fetchCategories()
+      } catch (err) {
+        Report.failure('Error', 'something went wrong', 'ok')
+        console.log(err.response)
+      }
+
+      this.closeCategoryDialog()
+    })
+
+
+  }
+
+  closeCategoryDialog() {
+    this.dialogUpdate = false
   }
 
   async save() {
@@ -215,23 +314,7 @@ export default class EditProductPage extends Vue {
     })
   }
 
-  async fetch() {
-    console.log(this.productId)
-    if (this.productId) {
-      try {
-        let req = await this.$axios.get(`/products/${this.productId}`)
-        this.product = req.data
-
-        req = await this.$axios.get("/categories")
-        this.categories = req.data
-      } catch (e) {
-        if (process.client)
-          Report.failure('Error', "Something went wrong", "Ok")
-        console.log(e.response)
-      }
-    }
-
-
+  async fetchCategories() {
     try {
       let req = await this.$axios.get("/categories")
       this.categories = req.data
@@ -240,7 +323,24 @@ export default class EditProductPage extends Vue {
         Report.failure('Error', "Something went wrong", "Ok")
       console.log(e.response)
     }
+  }
 
+  async fetch() {
+    try {
+      let req;
+      if (this.productId) {
+        req = await this.$axios.get(`/products/${this.productId}`)
+        this.product = req.data
+
+      }
+      // req = await this.$axios.get("/categories")
+      // this.categories = req.data
+      await this.fetchCategories();
+    } catch (e) {
+      if (process.client)
+        Report.failure('Error', "Something went wrong", "Ok")
+      console.log(e.response)
+    }
   }
 }
 </script>

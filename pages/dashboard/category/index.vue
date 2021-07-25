@@ -19,7 +19,7 @@
             vertical
           ></v-divider>
           <v-spacer></v-spacer>
-<!--          <v-btn class="mr-2" icon><v-icon>mdi-plus</v-icon></v-btn>-->
+          <!--          <v-btn class="mr-2" icon><v-icon>mdi-plus</v-icon></v-btn>-->
           <v-row justify="end">
             <v-col sm="6">
               <v-text-field
@@ -232,28 +232,36 @@ export default class CategoryPage extends Vue {
       try {
         await this.$axios.delete(`/categories/${this.editedItem.id}`)
         this.categories.splice(this.editedIndex, 1)
+        this.editedItem.id = ''
+        this.editedItem.name = ''
+        this.editedItem.description = ''
       } catch (e) {
         console.log(e.response)
       }
+      this.dialogDelete = false
     })
-    this.dialogDelete = false
   }
 
   async save() {
     this.$nextTick(async () => {
       if (!this.$refs.form.validate()) return;
-      if (this.editedIndex > -1) {
-        const category = await this.$axios.patch(`/categories/${this.editedItem.id}`, this.editedItem)
-        this.categories[this.editedIndex] = this.editedItem
-        // this.categories[this.editedIndex].name = this.editedItem.name
-        // this.categories[this.editedIndex].description = this.editedItem.description
-      } else {
-        delete this.editedItem.id
-        const category = (await this.$axios.post('/categories', this.editedItem))
-        // this.categories.unshift(category.data)
-        await this.$nuxt.refresh()
+
+      try {
+        if (this.editedIndex > -1) {
+          const category = await this.$axios.patch(`/categories/${this.editedItem.id}`, this.editedItem)
+          this.categories[this.editedIndex] = this.editedItem
+          this.categories[this.editedIndex].name = this.editedItem.name
+          this.categories[this.editedIndex].description = this.editedItem.description
+        } else {
+          delete this.editedItem.id
+          const category = (await this.$axios.post('/categories', this.editedItem))
+          // this.categories.unshift(category.data)
+          await this.$nuxt.refresh()
+        }
+        this.dialogUpdate = false
+      } catch (e) {
+        console.log(e.response)
       }
-      this.dialogUpdate = false
     })
   }
 

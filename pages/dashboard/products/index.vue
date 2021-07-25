@@ -139,9 +139,9 @@ export default class Products extends Vue {
       try {
         await this.$axios.delete(`products/${this.deletedId}`)
 
-        this.products = this.products.filter((p) => p.id !== this.deletedId)
+        this.products = this.products.filter((p: any) => p.id !== this.deletedId)
       } catch (err) {
-        Report.failure('Error', 'Something went wrong, ' + id, 'Ok')
+        Report.failure('Error', 'Something went wrong, ', 'Ok')
         console.log(err.response)
       }
       this.closeDeleteDialog()

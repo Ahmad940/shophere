@@ -1,6 +1,12 @@
 <template>
   <div>
-    <v-navigation-drawer :color="primaryColor" permanent fixed app clipped>
+    <v-navigation-drawer
+      :color="primaryColor"
+      :permanent="drawer"
+      :temporary="drawer"
+      fixed
+      clipped
+      app>
 
       <v-list>
         <v-list-item active-class="orange">
@@ -37,7 +43,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <list-group name='Products' :items="products" suffix="mdi-clipboard-pulse" />
+        <list-group name='Products' :items="products" suffix="mdi-clipboard-pulse"/>
 
       </v-list>
     </v-navigation-drawer>
@@ -81,18 +87,37 @@ const meta = namespace("meta")
     assets: [],
   }),
 })
-export default class Sidenavbar extends Vue{
+export default class Sidenavbar extends Vue {
   @meta.State
   public appname!: string
 
   @meta.State
+  public drawer!: boolean
+
+  @meta.State
   public primaryColor!: string
+
+  @meta.Mutation
+  UPDATE_DRAWER!: () => void
+
+  d(val: boolean){
+    console.log("beeb bob", val)
+  }
+  get draw() {
+    return this.drawer
+  }
+
+  set draw(val: boolean) {
+    this.UPDATE_DRAWER()
+  }
+
+
 }
 </script>
 
 <style>
 
-  .active{
-    background: orange;
-  }
+.active {
+  background: orange;
+}
 </style>
