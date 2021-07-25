@@ -29,7 +29,7 @@
             aria-label="email"
             v-model="form_data.email"
             label="Email"
-            :rules="[required, emailRules]"
+            :rules="[fieldRequired, emailRules]"
             outlined
             dense
             rounded
@@ -44,7 +44,7 @@
             rounded
             aria-label="password"
             v-model="form_data.password"
-            :rules="[required]"
+            :rules="[fieldRequired]"
             placeholder="Password"
             :append-icon="show_password ? 'mdi-eye' : 'mdi-eye-off'"
             :type="show_password ? 'text' : 'password'"
@@ -135,7 +135,8 @@ export default class Login extends Vue {
       // console.log(response)
       this.loading = false
       Notify.success('Login successful', {
-        timeout: 1000
+        timeout: 1000,
+        position: 'right-bottom'
       });
     } catch (err) {
       this.error = true

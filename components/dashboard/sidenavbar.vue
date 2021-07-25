@@ -70,7 +70,7 @@ const meta = namespace("meta")
       {
         icon: 'mdi-plus',
         title: 'Add',
-        to: '/dashboard/products/add'
+        to: '/dashboard/products/action'
       },
       {
         icon: 'mdi-clipboard-text-outline',

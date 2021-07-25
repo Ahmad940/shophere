@@ -29,7 +29,9 @@
       "@types/node",
       "@nuxtjs/auth-next",
       "vuetify",
-      "notiflix"
+      "notiflix",
+      "lodash"
+
     ]
   },
   "exclude": [

@@ -33,7 +33,7 @@
                 aria-label="first name"
                 v-model="form_data.firstName"
                 label="First Name"
-                :rules="[required]"
+                :rules="[fieldRequired]"
                 outlined
                 rounded
                 placeholder="First Name"
@@ -51,7 +51,7 @@
                 aria-label="last name"
                 v-model="form_data.lastName"
                 label="Last Name"
-                :rules="[required]"
+                :rules="[fieldRequired]"
                 outlined
                 rounded
                 placeholder="Last Name"
@@ -88,7 +88,7 @@
                     prepend-icon="mdi-calendar"
                     readonly
                     outlined
-                    :rules="[required]"
+                    :rules="[fieldRequired]"
                     dense
                     rounded
                     v-bind="attrs"
@@ -126,7 +126,7 @@
                 aria-label="mobile number"
                 v-model="form_data.phone"
                 label="Mobile Number"
-                :rules="[required, phoneValidation]"
+                :rules="[fieldRequired, phoneValidation]"
                 outlined
                 rounded
                 placeholder="Mobile Number"
@@ -143,7 +143,7 @@
                 aria-label="email"
                 v-model="form_data.email"
                 label="Email"
-                :rules="[required, emailRules]"
+                :rules="[fieldRequired, emailRules]"
                 outlined
                 rounded
                 placeholder="Email Address"
@@ -159,7 +159,7 @@
                 rounded
                 aria-label="password"
                 v-model="form_data.password"
-                :rules="[required, min]"
+                :rules="[fieldRequired, min]"
                 placeholder="Password"
                 :append-icon="show_password ? 'mdi-eye' : 'mdi-eye-off'"
                 :type="show_password ? 'text' : 'password'"
@@ -177,7 +177,7 @@
                 rounded
                 aria-label="password"
                 v-model="form_data.password1"
-                :rules="[required, min, passwordMatch(form_data.password1, form_data.password)]"
+                :rules="[fieldRequired, min, passwordMatch(form_data.password1, form_data.password)]"
                 placeholder="Password"
                 :append-icon="show_password1 ? 'mdi-eye' : 'mdi-eye-off'"
                 :type="show_password1 ? 'text' : 'password'"
@@ -209,10 +209,7 @@
           <v-card-actions>
             <v-row class="subtitle-1 mt-5" justify="space-between">
               <v-col align="left">
-                <!--                <nuxt-link to="#!" :class="textStyle"-->
-                <!--                           class="text-decoration-none body-2">-->
-                <!--                  <p>Forget Password?</p>-->
-                <!--                </nuxt-link>-->
+
               </v-col>
               <v-col align="right">
 

@@ -67,7 +67,7 @@ export default {
       local: {
         token: {
           property: "token",
-          required: true,
+          fieldRequired: true,
           type: 'Bearer',
         },
         user: {

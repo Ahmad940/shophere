@@ -23,8 +23,6 @@ export default class MyStore extends Vue {
   public drawer!: boolean;
 
   mounted() {
-    console.log("Beeb bob")
-    console.log(this.drawer)
   }
 }
 </script>

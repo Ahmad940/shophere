@@ -1,4 +1,5 @@
 import MetaModule from './modules/meta'
+import CategoryModule from "~/store/modules/category";
 
 const state =() => ({
 });
@@ -17,5 +18,8 @@ export default {
   mutations,
   actions,
   getters,
-  modules: { meta: MetaModule, },
+  modules: {
+    meta: MetaModule,
+    category: CategoryModule,
+  },
 }

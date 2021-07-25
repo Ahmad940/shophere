@@ -49,6 +49,8 @@ import {Vue, Component, namespace} from 'nuxt-property-decorator'
 
 const meta = namespace("meta")
 const auth = namespace("auth")
+import { upperFirst } from 'lodash'
+import UserModel from "~/models/user.model";
 
 @Component({
   name: "profilemenu",
@@ -82,11 +84,11 @@ export default class ProfileMenu extends Vue {
   public secondaryColor!: string
 
   @auth.State
-  public user!: object
+  public user!: UserModel
 
-  get fullName() {
+  get fullName(): string {
     const { firstName, lastName } = this.user
-    return `${firstName} ${lastName!}`
+    return `${upperFirst(firstName)} ${upperFirst(lastName)}`
   }
 }
 

@@ -1,7 +1,8 @@
 <template>
   <v-app-bar app clipped-left fixed :color="secondaryColor" class="white--text">
     <v-app-bar-nav-icon class="white--text" />
-    <v-app-bar-title v-text="appname"></v-app-bar-title>
+<!--    <v-app-bar-title v-text="appname"></v-app-bar-title>-->
+    <v-app-bar-title>{{ appname }}</v-app-bar-title>
     <v-spacer />
     <profilemenu />
   </v-app-bar>

@@ -6,8 +6,8 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
+    "build": "nuxt build --modern=server",
+    "start": "nuxt start --modern=server",
     "generate": "nuxt generate"
   },
   "dependencies": {
@@ -16,6 +16,7 @@
     "@nuxtjs/pwa": "^3.3.5",
     "add": "^2.0.6",
     "core-js": "^3.9.1",
+    "lodash": "^4.17.21",
     "notiflix": "^3.0.1",
     "nuxt": "^2.15.3",
     "nuxt-property-decorator": "^2.9.1",
@@ -25,6 +26,7 @@
     "@nuxt/types": "^2.15.3",
     "@nuxt/typescript-build": "^2.1.0",
     "@nuxtjs/vuetify": "^1.11.3",
+    "@types/lodash": "^4.14.171",
     "vuex-module-decorators": "^1.0.1"
   },
   "keywords": [
