@@ -16,6 +16,19 @@
             lazy-validation
           >
             <v-row>
+
+              <!--              Image section-->
+              <v-col sm="12">
+
+                <select-image-dialog @select="selectedImage" :color="secondaryColor"/>
+
+                <v-col cols="4">
+                  <shop-image v-if="product.productImage" :image="getImageUrl"/>
+                </v-col>
+                <v-divider/>
+              </v-col>
+              <!--             End of Image -->
+
               <v-col sm="12" md="6" cols="12">
                 <v-text-field
                   name="pname"
@@ -208,10 +221,13 @@ import {Component, Vue, namespace, Watch} from "nuxt-property-decorator";
 import rules from "~/mixins/rules";
 import {Notify, Report} from "notiflix";
 import {omit} from 'lodash'
+import SelectImageDialog from "~/components/select-image-dialog.vue";
+import ShopImage from "~/components/shop-image.vue";
 
 const meta = namespace('meta')
 
 @Component({
+  components: {ShopImage, SelectImageDialog},
   layout: 'dashboard',
   mixins: [rules]
 })
@@ -238,10 +254,21 @@ export default class EditProductPage extends Vue {
   secondaryColor!: string;
 
   @meta.State
+  appUrl!: string;
+
+  @meta.State
   primaryColor!: string;
+
+  get getImageUrl(): string {
+    return `${this.appUrl}/upload/images/${this.product.productImage}`
+  }
 
   get formTitle(): string {
     return !this.productId ? "Add Product" : "Edit Product"
+  }
+
+  selectedImage(image: any) {
+    this.product.productImage = image?.filename
   }
 
   editedCategory = {
@@ -256,7 +283,7 @@ export default class EditProductPage extends Vue {
   }
 
   async discard() {
-    this.$router.back()
+    await this.$router.push('/dashboard/products')
   }
 
   async saveCategoryDialog() {
@@ -287,7 +314,12 @@ export default class EditProductPage extends Vue {
   async save() {
     if (!this.$refs.form.validate()) return;
 
+    if (!this.product.productImage) {
+      Report.failure('Error', 'Product image must be selected', 'Ok')
+      return
+    }
 
+    console.log(this.product)
     this.$nextTick(async () => {
       try {
         if (this.productId) {
@@ -298,13 +330,13 @@ export default class EditProductPage extends Vue {
             position: 'right-bottom'
           })
         } else {
-          const newProduct = {...this.product, category: this.product.category.id, productImage: 'weeee'}
+          const newProduct = {...this.product, category: this.product.category.id}
           const req = await this.$axios.post(`/products`, omit(newProduct, ['id']))
           Notify.success('Product added successfully', {
             position: 'right-bottom'
           })
         }
-        this.$router.back()
+        await this.$router.push('/dashboard/products')
       } catch (e) {
         Report.failure('Error', 'Something went wrong', 'Ok')
         console.log(this.product)

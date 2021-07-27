@@ -35,6 +35,13 @@
               ></v-text-field>
             </v-col>
           </v-row>
+          <v-btn
+            dark
+            :color="secondaryColor"
+            @click="$router.push('products/action')"
+            small>
+            Add
+          </v-btn>
           <v-dialog v-model="dialogDelete" max-width="500px" persistent>
             <v-card>
               <v-card-title class="text-h5 orange white--text">
@@ -60,7 +67,13 @@
 
       <!--      Images-->
       <template v-slot:item.productImage="{ item }">
-        Under development
+        <!--        <v-row>-->
+        <!--          <v-col cols="3">-->
+        <div style="width: 80px; height: 80px;" class="pa-1">
+          <shop-image :image="getImageUrl(item)"/>
+        </div>
+        <!--          </v-col>-->
+        <!--        </v-row>-->
       </template>
       <!--  End of images    -->
 
@@ -72,6 +85,13 @@
 
       <!--  Actions   -->
       <template v-slot:item.actions="{ item }">
+        <v-icon
+          small
+          class="mr-2"
+          @click=""
+        >
+          mdi-eye
+        </v-icon>
         <v-icon
           small
           class="mr-2"
@@ -92,12 +112,14 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue, namespace} from "nuxt-property-decorator";
+import {Component, namespace, Vue} from "nuxt-property-decorator";
 import {Report} from "notiflix";
+import ShopImage from "~/components/shop-image.vue";
 
 const meta = namespace('meta')
 
 @Component({
+  components: {ShopImage},
   layout: 'dashboard'
 })
 export default class Products extends Vue {
@@ -119,6 +141,13 @@ export default class Products extends Vue {
 
   @meta.State
   primaryColor!: string;
+
+  @meta.State
+  appUrl!: string;
+
+  getImageUrl(image: any): string {
+    return `${this.appUrl}/upload/images/${image.productImage}`
+  }
 
   edit(id: string) {
     this.$router.push(`products/action/${id}`)
@@ -150,8 +179,8 @@ export default class Products extends Vue {
 
   async fetch() {
     try {
-      const req = await this.$axios.get("/products")
-      this.products = req.data
+      const req = await this.$axios.$get("/products")
+      this.products = req
     } catch (err) {
       if (process.client) Report.failure("error", 'Something went wrong', 'ok')
     }

@@ -11,7 +11,8 @@ import {Vue, Component} from "nuxt-property-decorator";
       emailRules: (v: string) => /.+@.+\..+/.test(v) || 'Invalid e-mail',
       phoneValidation: (v: any) => v?.length === 11 || 'Number must be 11 digits',
       passwordMatch: (value: string, password: string) => value === password || 'Password does not match',
-      genderRule: (value: string) => (value == 'male' || value == 'female') || 'Gender must be selected'
+      genderRule: (value: string) => (value == 'male' || value == 'female') || 'Gender must be selected',
+      uploadFileVal : (value: any) => !value || value.size < 2000000 || 'Avatar size should be less than 2 MB!',
     }
   }
 })
