@@ -15,6 +15,7 @@
             v-model="valid"
             lazy-validation
           >
+
             <v-row>
 
               <!--              Image section-->
