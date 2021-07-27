@@ -15,6 +15,7 @@ export default class MetaModule extends VuexModule {
   drawer?: boolean = false
   // primaryColor: string = "black"
   primaryColor: string = "#000080"
+  appUrl: string = process.env.asset as string || 'http://localhost:5000'
   secondaryColor: string = "orange"
   navTextColor: string = "white"
 

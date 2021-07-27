@@ -47,17 +47,18 @@ export default {
 
   // global router config
   router: {
-    // Run the middleware/user-agent.js on every page
+    // Run the middleware/users-agent.js on every page
     middleware: 'auth'
   },
 
   env: {
-    baseUrl: process.env.BASE_URL || 'http://localhost:5000'
+    baseUrl: process.env.BASE_URL || 'http://localhost:5000/api',
+    asset: process.env.asset || 'http://localhost:5000',
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: process.env.BASE_URL
+    baseURL: process.env.BASE_URL,
   },
 
   // Auth modul configuration: https://auth.nuxtjs.org/
