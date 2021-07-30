@@ -1,8 +1,13 @@
 <template>
-<v-app dark>
+  <v-app dark>
     <v-main>
-      <v-container>
-        <nuxt />
+
+      <shop-appbar-user v-if="$auth.loggedIn"/>
+      <shop-appbar-guess v-else/>
+
+      <v-container fluid>
+        <shop-parallax/>
+        <nuxt/>
       </v-container>
     </v-main>
   </v-app>
@@ -10,7 +15,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       clipped: false,
       drawer: false,

@@ -19,6 +19,7 @@ export default class MetaModule extends VuexModule {
   secondaryColor: string = "orange"
   navTextColor: string = "white"
 
+
   @Mutation
   UPDATE_DRAWER() {
     this.drawer = !this.drawer
