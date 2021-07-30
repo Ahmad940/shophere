@@ -17,6 +17,7 @@
     <v-navigation-drawer
       :color="primaryColor"
       v-model="drawer"
+      fixed
       clipped
       app>
 
