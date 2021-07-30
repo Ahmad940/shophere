@@ -4,12 +4,13 @@
   </div>
 </template>
 
+<script lang="ts">
+import Vue from 'vue'
 
-
-<script>
-export default {
-  name: "index"
-}
+export default Vue.extend({
+  name: "index",
+  auth: false,
+})
 </script>
 
 <style scoped>

@@ -1,7 +1,15 @@
 <template>
-  <v-container>
-
-  </v-container>
+    <v-container fluid>
+      <shop-parallax/>
+      <v-row>
+        <v-col cols="3" class="d-none d-md-flex">
+          <shop-sidebar />
+        </v-col>
+        <v-col cols="9">
+          <shop-products/>
+        </v-col>
+      </v-row>
+    </v-container>
 </template>
 
 <script lang="ts">

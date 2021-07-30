@@ -6,17 +6,6 @@
       <shop-appbar-guess v-else/>
 
       <v-container fluid>
-        <shop-parallax/>
-
-        <v-container fluid>
-          <v-row>
-            <v-col cols="3" class="d-none d-md-flex">
-              <shop-sidebar />
-            </v-col>
-            <v-col cols="9">a</v-col>
-          </v-row>
-        </v-container>
-
         <nuxt/>
       </v-container>
     </v-main>

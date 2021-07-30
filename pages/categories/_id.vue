@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <p class="text-h6">Top deals</p>
+    beeb bob
   </v-container>
 </template>
 
@@ -8,7 +8,8 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: "shop-products"
+  name: "_id",
+  auth: false,
 })
 </script>
 
