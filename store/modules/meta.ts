@@ -6,8 +6,6 @@ import * as store from '../index'
   name: 'meta',
   stateFactory: true,
   namespaced: true,
-  dynamic: true,
-  store: new Store(store.default)
 })
 export default class MetaModule extends VuexModule {
   appname?: string = "Shop Here"

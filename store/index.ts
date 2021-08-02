@@ -1,5 +1,6 @@
 import MetaModule from './modules/meta'
 import CategoryModule from "~/store/modules/category";
+import Carts from "~/store/modules/carts";
 
 const state =() => ({
 });
@@ -21,5 +22,6 @@ export default {
   modules: {
     meta: MetaModule,
     category: CategoryModule,
+    cart: Carts,
   },
 }
