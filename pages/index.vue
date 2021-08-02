@@ -2,11 +2,11 @@
     <v-container fluid>
       <shop-parallax/>
       <v-row>
-        <v-col cols="3" class="d-none d-md-flex">
+        <v-col cols="2" class="d-none d-md-flex">
           <shop-sidebar />
         </v-col>
-        <v-col cols="9">
-          <shop-products/>
+        <v-col cols="12" md="10" sm="12" lg="10">
+          <shop-home-products-list />
         </v-col>
       </v-row>
     </v-container>

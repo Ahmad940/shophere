@@ -138,6 +138,8 @@ export default class Login extends Vue {
         timeout: 1000,
         position: 'right-bottom'
       });
+      console.log("query", this.$route.query)
+      this.$router.go(decodeURIComponent(this.$route.query.redirect || "/"))
     } catch (err) {
       this.error = true
       this.error_message = err.response.data.message

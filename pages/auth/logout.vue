@@ -9,6 +9,7 @@ export default {
   name: "logout",
   mounted() {
     Notify.success('Logout successful', {
+      position: 'right-bottom',
       timeout: 1000
     });
   },
