@@ -1,6 +1,8 @@
 <template>
-  <v-container>
-    <p class="text-h6">Top deals</p>
+  <v-container fluid>
+    <shop-daily-pick />
+    <p class="text-h6">Product for you</p>
+    <p class="text-h6">Popular brands</p>
   </v-container>
 </template>
 
