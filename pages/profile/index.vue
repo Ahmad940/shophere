@@ -40,7 +40,7 @@
             mdi-bell
           </v-icon>
         <v-badge
-          color="green"
+          color="blue"
           content="3" >
          Notifications
         </v-badge>
@@ -56,18 +56,109 @@
 
 
 <!--  my info details  -->
-        <v-tab-item>
-          <v-card flat>
-            <v-card-text>
-              <!-- content -->
-              <p><b>My info</b></p>
+  <v-tab-item>
+    <v-card flat
+        max-width="775"
+        class="mx-auto">
+        <v-card-text>
+          <h1><b>My info</b></h1>  
+
+          <!--profile image          -->
+          <v-img              
+            src="https://lh3.googleusercontent.com/_-i4N6RIKYPxSkCD10vj1sDFWSdjSP-r2K1M8iQGBgxnT6cJ41nXoSedBWZtEy_JdykH_ikD0KWlrLdoP1YhN4e0n0cS7Nc9oiGcPeFVLkkVMEigkEIGnaYm0cPGHgTd37SZc8nz4xzFtS3oEwn0sYT5E5Nb7Ex5o4VeTRadpmYgXVz9ZN8CaM43gyBz4jW_gjGBNqF11juEM_Yik82bDHKKfLRyuLGxehDmPRTzQGnIAm8Bg32ijA92iE7umpCt7PKDcR5SlWPOn98wGQ9pVm3yHvDMN20mfLmCZIirB57J372NtE0OL1nj0JhhxosfaAgknrOf3SrkIPGIDkSqSXgDBY0wciCQov4TXsoHNEphzdI5Z6hbVlCy6E1x08Nc1J9eCr1KjF3CScqfwvJvSUCpV8x3Eo51Xj2X-D4OSliCr6XTLpMxHfw6uZC5ANqHOUvGsRxkk5rtYYCG1KWkwE7dFXJu4AqatwuM_Lti8xueXXQUm5F33ZagRUfVxS6ZeH0lYNjaTJ1VhY6NKB5gQfKnhq6MESDMrgBZOEeUXOpGlQs4Np_pG4mAJdNmzdZUF_FVsL-kDbz_l5H9eYTupDIHp_Q_ElAmitG8kORr2Yt4uxF4gU1urLQE-j1nLX_XaxsSoZRUOZa5gwoStEr384Ynyti3X6KRuO_ilOhNYdC3eywYDTuohjZj8CNkdW2QCrrPoVOkcAX0-Dq6ud1tXSXx=w277-h208-no?authuser=0"   
+              height="300px" dark >
+            <v-row class="fill-height">
+                <v-card-title class="white--text pl-12 pt-12">
+                    <div class="text-h4 pl-12 pt-12">
+                    Presh cassey
+                    </div>
+                </v-card-title>
+            </v-row>
+          </v-img>
+
+          <v-list two-line>
+            <v-list-item>
+              <v-list-item-icon>
+                <v-icon color="indigo">
+                  mdi-phone
+                </v-icon>
+              </v-list-item-icon>
+
+              <v-list-item-content>
+                <v-list-item-title>(234) 555-1234</v-list-item-title>
+                <v-list-item-subtitle>Mobile</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item>
+              <v-list-item-content>
+                <v-list-item-title>(234) 555-6789</v-list-item-title>
+                <v-list-item-subtitle>Work</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-divider inset></v-divider>
+
+            <v-list-item>
+              <v-list-item-icon>
+                <v-icon color="indigo">
+                  mdi-email
+                </v-icon>
+              </v-list-item-icon>
+
+              <v-list-item-content>
+                <v-list-item-title>preshcassey@example.com</v-list-item-title>
+                <v-list-item-subtitle>Personal</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item>
+              <v-list-item-action></v-list-item-action>
+
+              <v-list-item-content>
+                <v-list-item-title>presh,cassey@example.com</v-list-item-title>
+                <v-list-item-subtitle>Work</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-divider inset></v-divider>
+
+            <v-list-item>
+              <v-list-item-icon>
+                <v-icon color="indigo">
+                  mdi-map-marker
+                </v-icon>
+              </v-list-item-icon>
+
+              <v-list-item-content>
+                <v-list-item-title>14 mando kaduna</v-list-item-title>
+                <v-list-item-subtitle>nigeria, 800100</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+            <!-- button -->
+          <v-row align="center" justify="space-around">
+            <v-btn
+              tile
+              color="success">
+                <v-icon left>
+                  mdi-pencil
+                </v-icon>
+                  Edit
+            </v-btn>
+            <v-btn
+              depressed
+              color="error">
+              <v-icon left>
+                mdi-trash
+              </v-icon>
+              Delete account
+            </v-btn>               
+          </v-row>
               
-              
-              <v-divider></v-divider>
-              <p><b>My Address</b></p>
-            </v-card-text>
-          </v-card>
-        </v-tab-item>
+        </v-card-text>
+      </v-card>
+   </v-tab-item>
         
 <!--        my favourite  -->
         <v-tab-item>
