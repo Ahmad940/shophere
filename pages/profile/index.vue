@@ -158,76 +158,86 @@
               
         </v-card-text>
       </v-card>
-   </v-tab-item>
+  </v-tab-item>
         
-<!--        my favourite  -->
-        <v-tab-item>
-          <v-card flat>
-            <v-card-text>
-              <!-- content -->
+<!--  my favourite  -->
+  <v-tab-item>
+    <v-card flat>
+      <v-card-text>
+        <!-- content -->
+<p>add anything</p>
+      </v-card-text>
+    </v-card>
+  </v-tab-item>
 
-            </v-card-text>
-          </v-card>
-        </v-tab-item>
+  <!-- orders details -->
+  <v-tab-item>      
+     <v-card flat 
+     max-width="400"
+     tile>
+      <v-card-text>
+        <!-- content -->
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title>Sneakers</v-list-item-title>
+            <v-list-item-subtitle>Pending </v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
 
-        <!-- orders details -->
-        <v-tab-item>
-          <v-card flat>
-            <v-card-text>
-           <!-- content -->
-
-            </v-card-text>
-          </v-card>
-        </v-tab-item>
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title>Generator</v-list-item-title>
+            <v-list-item-subtitle>Recieved </v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </v-card-text>
+    </v-card>
+ </v-tab-item>
 
 <!-- notification details -->
-        <v-tab-item>
-          <v-card flat>
-            <v-card-text>
-           <!-- content -->
-        <v-card
-          max-width="450"
-          class="mx-auto" >
-        <v-list three-line>
-            <template v-for="(item, index) in items">
-              <v-subheader
-                v-if="item.header"
-                :key="item.header"
-                v-text="item.header"
-              ></v-subheader>
+  <v-tab-item>
+    <v-card flat max-width="450" class="mx-auto">
+       <v-card-text>
+         <!-- content -->
+          <v-list three-line>
+              <template v-for="(item, index) in items">
+                <v-subheader
+                  v-if="item.header"
+                  :key="item.header"
+                  v-text="item.header"
+                ></v-subheader>
 
-              <v-divider
-                v-else-if="item.divider"
-                :key="index"
-                :inset="item.inset"
-              ></v-divider>
+                <v-divider
+                  v-else-if="item.divider"
+                  :key="index"
+                  :inset="item.inset"
+                ></v-divider>
 
-              <v-list-item
-                v-else
-                :key="item.title"
-              >
-                <v-list-item-avatar>
-                  <v-img :src="item.avatar"></v-img>
-                </v-list-item-avatar>
+                <v-list-item
+                  v-else
+                  :key="item.title"
+                >
+                  <v-list-item-avatar>
+                    <v-img :src="item.avatar"></v-img>
+                  </v-list-item-avatar>
 
-                <v-list-item-content>
-                  <v-list-item-title v-html="item.title"></v-list-item-title>
-                  <v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
-            </template>
+                  <v-list-item-content>
+                    <v-list-item-title v-html="item.title"></v-list-item-title>
+                    <v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+              </template>
           </v-list>
-        </v-card>
-            </v-card-text>
-          </v-card>
-        </v-tab-item>
+      </v-card-text>
+    </v-card>
+  </v-tab-item>
 
 <!-- payment details -->
                 <v-tab-item>
           <v-card flat>
             <v-card-text>
            <!-- content -->
-
+<p>add anything</p>
             </v-card-text>
           </v-card>
         </v-tab-item>
