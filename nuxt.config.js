@@ -54,6 +54,7 @@ export default {
   env: {
     baseUrl: process.env.BASE_URL || 'http://localhost:5000/api',
     asset: process.env.asset || 'http://localhost:5000',
+    fv: process.env.fv || 'FLWPUBK_TEST-92c3a3aa7ab3ce0aae5173fbc22a7417-X',
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

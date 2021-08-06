@@ -13,6 +13,7 @@
 
 
 <script>
+ const publickey = process.env.fv;
 export default {
   name: "index",
 
@@ -20,16 +21,15 @@ export default {
  methods: {
     placeOrder() {
       window.FlutterwaveCheckout({
-        public_key: "FLWPUBK_TEST-92c3a3aa7ab3ce0aae5173fbc22a7417-X",
+        public_key: publickey,
         tx_ref: "new-sale"+ new Date(),
-        amount: 10,
+        amount: 50,
         currency: "NGN",
         country: "NG",
         payment_options: "card",
         customer: {
-          email: "abdrhmnsaeed@gmail.com",
-          phone_number: "+2348120793414",
-          name: "Ibn-Saeed",
+          email: this.$auth.user.email,
+          name: `${this.$auth.user.firstName} ${this.$auth.user.lastName}`,
         },
         callback: function(data) {
           console.log(data);
