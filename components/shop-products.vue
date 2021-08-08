@@ -25,7 +25,7 @@
               height="200px"
             >
               <div class="" style="position: absolute; right: 0; bottom: 15px">
-                <v-btn icon :color="transparent" :class="{ 'show-btns': hover }">
+                <v-btn icon :color="transparent" @click="addToCart(product.id)" :class="{ 'show-btns': hover }">
                   <v-icon>mdi-cart</v-icon>
                 </v-btn>
 
@@ -51,7 +51,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import {Report} from "notiflix";
-import {mapState} from 'vuex'
+import {mapActions, mapState} from 'vuex'
 
 export default Vue.extend({
   name: "shop-daily-pick",
@@ -70,9 +70,17 @@ export default Vue.extend({
     ...mapState('modules/meta', ['appUrl', 'primaryColor', 'secondaryColor']),
   },
   methods: {
+    ...mapActions('modules/carts', ['addItemToCart']),
     getImageUrl(image: any): string {
       return `${this.appUrl}/upload/images/${image}`
     },
+    async addToCart(id: string) {
+      const formData = {
+        quantity: 1,
+        product: id,
+      }
+      await this.addItemToCart(formData)
+    }
   }
 })
 </script>

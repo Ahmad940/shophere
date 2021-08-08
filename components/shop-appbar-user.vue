@@ -16,12 +16,13 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import {mapState} from 'vuex'
+import {mapGetters, mapState} from 'vuex'
 
 export default Vue.extend({
   name: "shop-appbar-user",
   computed: {
-    ...mapState('modules/meta', ['appname', 'secondaryColor', 'primaryColor'])
+    ...mapState('modules/meta', ['appname', 'secondaryColor', 'primaryColor']),
+    ...mapGetters('modules/carts', ['CARTS', 'LOADING']),
   }
 })
 </script>
