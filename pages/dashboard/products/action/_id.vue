@@ -328,13 +328,15 @@ export default class EditProductPage extends Vue {
             ...this.product, category: this.product.category.id
           })
           Notify.success('Product modified successfully', {
-            position: 'right-bottom'
+            position: 'right-bottom',
+            timeout: 1000,
           })
         } else {
           const newProduct = {...this.product, category: this.product.category.id}
           const req = await this.$axios.post(`/products`, omit(newProduct, ['id']))
           Notify.success('Product added successfully', {
-            position: 'right-bottom'
+            position: 'right-bottom',
+            timeout: 1000,
           })
         }
         await this.$router.push('/dashboard/products')

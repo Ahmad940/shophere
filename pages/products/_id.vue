@@ -1,16 +1,16 @@
 <template>
-  <v-container>
-    beeb bob
+  <v-container fluid>
+      <p>{{ $route.params.id }}</p>
   </v-container>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-
-export default Vue.extend({
+<script>
+export default {
   name: "_id",
   auth: false,
-})
+  fetch() {
+  }
+}
 </script>
 
 <style scoped>

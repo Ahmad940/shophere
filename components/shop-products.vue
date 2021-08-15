@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container fluid class="pa-0 ma-0">
     <v-toolbar dense dark :color="primaryColor">
       <v-toolbar-title>{{ name }}</v-toolbar-title>
     </v-toolbar>
@@ -12,37 +12,47 @@
         lg="3"
         sm="6"
       >
-        <v-hover v-slot="{ hover }">
-          <v-card
-            width="100vw"
-            elevation="hover ? 16 : 2"
-            :class="{ 'on-hover': hover }"
+        <!--        <v-hover v-slot="{ hover }">-->
+        <v-card
+          width="100vw"
+        >
+          <v-img
+            :src="getImageUrl(product.productImage)"
+            class="white--text align-end"
+            gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+            height="200px"
           >
-            <v-img
-              :src="getImageUrl(product.productImage)"
-              class="white--text align-end"
-              gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-              height="200px"
-            >
-              <div class="" style="position: absolute; right: 0; bottom: 15px">
-                <v-btn icon :color="transparent" @click="addToCart(product.id)" :class="{ 'show-btns': hover }">
-                  <v-icon>mdi-cart</v-icon>
-                </v-btn>
+            <!--              <div class="" style="position: absolute; right: 0; bottom: 15px">-->
+            <!--                <v-btn icon :color="transparent" @click="addToCart(product.id)" :class="{ 'show-btns': hover }">-->
+            <!--                  <v-icon>mdi-cart</v-icon>-->
+            <!--                </v-btn>-->
 
-                <v-btn icon :color="transparent" :class="{ 'show-btns': hover }">
-                  <v-icon>mdi-eye</v-icon>
-                </v-btn>
-              </div>
-              <v-card-title v-text="product.name"></v-card-title>
-            </v-img>
+            <!--                <v-btn icon :color="transparent" :class="{ 'show-btns': hover }">-->
+            <!--                  <v-icon>mdi-eye</v-icon>-->
+            <!--                </v-btn>-->
+            <!--              </div>-->
+            <v-card-title v-text="product.name"></v-card-title>
+          </v-img>
 
-            <!--            <v-card-actions class="black">-->
-            <!--              <v-spacer></v-spacer>-->
+          <v-card-actions class="grey lighten-1">
+            <v-btn
+              text
+              dark
+              class="grey">
+              ₦{{ product.price }}
+            </v-btn>
+            <v-spacer></v-spacer>
 
+            <v-btn icon dark @click="addToCart(product.id)">
+              <v-icon>mdi-cart</v-icon>
+            </v-btn>
 
-            <!--            </v-card-actions>-->
-          </v-card>
-        </v-hover>
+            <v-btn icon :to="`/products/${product.id}`" dark>
+              <v-icon>mdi-eye</v-icon>
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+        <!--        </v-hover>-->
       </v-col>
     </v-row>
   </v-container>
@@ -51,7 +61,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import {Report} from "notiflix";
-import {mapActions, mapState} from 'vuex'
+import {mapActions, mapGetters, mapState} from 'vuex'
 
 export default Vue.extend({
   name: "shop-daily-pick",
@@ -68,6 +78,12 @@ export default Vue.extend({
   }),
   computed: {
     ...mapState('modules/meta', ['appUrl', 'primaryColor', 'secondaryColor']),
+    ...mapGetters('modules/carts', ['CARTS', 'LOADING'])
+  },
+  created() {
+    // const id = '6a2df58e-f37a-41dc-9ded-9b5b2e93fc68'
+    // let o = this.CARTS.includes((a: any) => a.id === id)
+    // console.log("Created", o)
   },
   methods: {
     ...mapActions('modules/carts', ['addItemToCart']),
