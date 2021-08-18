@@ -7,9 +7,20 @@
     <v-btn to="/profile" dark depressed fab icon>
       <v-icon>mdi-account</v-icon>
     </v-btn>
-    <v-btn to="/cart" dark depressed fab icon>
+
+    <v-btn v-if="CARTS.length" to="/cart" dark depressed fab icon>
+      <v-badge
+        :color="primaryColor"
+        :content="CARTS.length"
+      >
+        <v-icon>mdi-cart</v-icon>
+      </v-badge>
+    </v-btn>
+
+    <v-btn v-else to="/cart" dark depressed fab icon>
       <v-icon>mdi-cart</v-icon>
     </v-btn>
+
     <v-btn to="/auth/logout" dark depressed fab icon>
       <v-icon>mdi-logout</v-icon>
     </v-btn>
@@ -18,13 +29,19 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import {mapGetters, mapState} from 'vuex'
+import {mapGetters, mapState, mapActions} from 'vuex'
 
 export default Vue.extend({
   name: "shop-appbar-user",
+  methods: {
+    ...mapActions('modules/carts', ['fetchCarts'])
+  },
   computed: {
     ...mapState('modules/meta', ['appname', 'secondaryColor', 'primaryColor']),
     ...mapGetters('modules/carts', ['CARTS', 'LOADING']),
+  },
+  created() {
+    this.fetchCarts()
   }
 })
 </script>

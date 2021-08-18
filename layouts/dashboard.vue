@@ -97,11 +97,11 @@ export default {
           title: 'Assets',
           to: '/dashboard/assets'
         },
-        {
-          icon: 'mdi-account-multiple',
-          title: 'Users',
-          to: '/dashboard/users'
-        },
+        // {
+        //   icon: 'mdi-account-multiple',
+        //   title: 'Users',
+        //   to: '/dashboard/users'
+        // },
       ],
       products: [
         {

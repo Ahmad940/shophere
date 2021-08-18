@@ -15,7 +15,7 @@ import {reverse, upperFirst} from "lodash";
 import {Report} from "notiflix";
 
 export default {
-  name: "_id",
+  name: "category_name",
   auth: false,
   data: () => ({
     products: [],

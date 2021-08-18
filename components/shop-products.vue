@@ -22,6 +22,18 @@
             gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
             height="200px"
           >
+            <template v-slot:placeholder>
+              <v-row
+                class="fill-height ma-0"
+                align="center"
+                justify="center"
+              >
+                <v-progress-circular
+                  indeterminate
+                  color="grey lighten-5"
+                ></v-progress-circular>
+              </v-row>
+            </template>
             <!--              <div class="" style="position: absolute; right: 0; bottom: 15px">-->
             <!--                <v-btn icon :color="transparent" @click="addToCart(product.id)" :class="{ 'show-btns': hover }">-->
             <!--                  <v-icon>mdi-cart</v-icon>-->
@@ -91,6 +103,10 @@ export default Vue.extend({
       return `${this.appUrl}/upload/images/${image}`
     },
     async addToCart(id: string) {
+      if (!this.$auth.loggedIn) {
+        this.$auth.redirect("login")
+        return
+      }
       const formData = {
         quantity: 1,
         product: id,
