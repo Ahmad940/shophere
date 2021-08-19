@@ -138,7 +138,8 @@ export default {
 
       try {
         await this.$axios.$delete('/carts/check')
-        this.fetchCarts()
+        await this.fetchCarts()
+        await this.$router.push('/cart')
       } catch (e) {
         console.log(e.response)
         console.log(e.message)
