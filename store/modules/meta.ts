@@ -10,17 +10,12 @@ import * as store from '../index'
 export default class MetaModule extends VuexModule {
   appname?: string = "Shop Here"
   darkMode?: boolean = false
-  drawer?: boolean = false
+  // drawer?: boolean = false
   // primaryColor: string = "black"
   primaryColor: string = "#000080"
   appUrl: string = process.env.asset as string || 'http://localhost:5000'
+  pay_key: string = process.env.pay_key as string || ''
   secondaryColor: string = "orange"
   navTextColor: string = "white"
-
-
-  @Mutation
-  UPDATE_DRAWER() {
-    this.drawer = !this.drawer
-  }
 
 }

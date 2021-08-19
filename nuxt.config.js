@@ -17,7 +17,9 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+    { src: "~/plugins/vue-paystack", ssr: false },
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -54,7 +56,7 @@ export default {
   env: {
     baseUrl: process.env.BASE_URL || 'http://localhost:5000/api',
     asset: process.env.asset || 'http://localhost:5000',
-    fv: process.env.fv || 'FLWPUBK_TEST-92c3a3aa7ab3ce0aae5173fbc22a7417-X',
+    pay_key: process.env.pay_key || ''
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

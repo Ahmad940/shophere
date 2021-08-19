@@ -15,6 +15,7 @@ const getters = {
 
 const mutations = {
   SET_CARTS(state, payload) {
+    payload = payload.filter((p) => p.author.id == this.$auth.user.id)
     state.carts = payload
   },
   ADD_ITEM(state, payload) {

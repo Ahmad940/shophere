@@ -51,7 +51,7 @@
               text
               dark
               class="grey">
-              ₦{{ product.price }}
+              {{ getPrice(product) }}
             </v-btn>
             <v-spacer></v-spacer>
 
@@ -70,12 +70,12 @@
   </v-container>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
 import {Report} from "notiflix";
 import {mapActions, mapGetters, mapState} from 'vuex'
 
-export default Vue.extend({
+export default {
   name: "shop-daily-pick",
   props: {
     name: {
@@ -90,7 +90,7 @@ export default Vue.extend({
   }),
   computed: {
     ...mapState('modules/meta', ['appUrl', 'primaryColor', 'secondaryColor']),
-    ...mapGetters('modules/carts', ['CARTS', 'LOADING'])
+    ...mapGetters('modules/carts', ['CARTS', 'LOADING']),
   },
   created() {
     // const id = '6a2df58e-f37a-41dc-9ded-9b5b2e93fc68'
@@ -99,10 +99,18 @@ export default Vue.extend({
   },
   methods: {
     ...mapActions('modules/carts', ['addItemToCart']),
-    getImageUrl(image: any): string {
+    getImageUrl(image) {
       return `${this.appUrl}/upload/images/${image}`
     },
-    async addToCart(id: string) {
+    getPrice(product) {
+      let a = ""
+      // if (product.price.length < 3)
+      //   return `comma₦${product.price}`
+      // else return `not₦${product.price}`
+      // return "₦ " + (Math.round(product.price * 100) / 100).toLocaleString();
+      return "₦ " + ((product.price * 100) / 100).toLocaleString();
+    },
+    async addToCart(id) {
       if (!this.$auth.loggedIn) {
         this.$auth.redirect("login")
         return
@@ -114,7 +122,7 @@ export default Vue.extend({
       await this.addItemToCart(formData)
     }
   }
-})
+}
 </script>
 
 <style scoped>

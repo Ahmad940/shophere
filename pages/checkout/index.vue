@@ -1,62 +1,154 @@
 <template>
-    <div class="checkoutPage">
-        <div class="card">
-            <p>Total:  <b>N10</b></p>
-            <button v-on:click="placeOrder">
-                CHECKOUT
-            </button>
-        </div>
-        
-    </div>
+  <v-container>
+    <p class="text-center display-2 pa-5">Check out</p>
+    <v-row>
+      <v-col cols="12" md="6" sm="12">
+        <v-text-field
+          name = "name"
+          outlined
+          :value="getFirstName"
+          label="First Name"
+          dense
+        />
+      </v-col>
+
+      <v-col cols="12" md="6" sm="12">
+        <v-text-field
+          name = "name"
+          outlined
+          :value="getLastName"
+          label="Last Name"
+          dense
+        />
+      </v-col>
+
+      <v-col cols="12" md="6" sm="12">
+        <v-text-field
+          name = "name"
+          outlined
+          :value="getEmail"
+          label="Email Address"
+          dense
+        />
+      </v-col>
+
+
+      <v-col cols="12" md="6" sm="12">
+        <v-text-field
+          name = "name"
+          outlined
+          label="Phone Number"
+          v-model="formData.phone"
+          dense
+        />
+      </v-col>
+
+      <v-col sm="12">
+        <v-textarea
+          outlined
+          label="Shipping Address"
+          v-model="formData.address"
+          dense
+          height="80"
+          />
+      </v-col>
+
+      <v-col cols="12" md="6" sm="12">
+        <v-text-field
+          name = "name"
+          outlined
+          label="Zip/Postal Code"
+          v-model="formData.zipCode"
+          dense
+        />
+      </v-col>
+
+      <v-col cols="12" md="6" sm="12">
+        <v-text-field
+          name = "name"
+          outlined
+          label="State"
+          v-model="formData.state"
+          dense
+        />
+      </v-col>
+
+
+    </v-row>
+    <paystack
+      :amount="TOTAL"
+      :email="getEmail"
+      paystackkey="pk_test_3b1b09aaf1e7eea8e9640b1a964b48c323bec47d"
+      :reference="genReference"
+      :callback="callback"
+      :close="close"
+      :embed="false"
+      :channels="['card', 'bank', 'ussd', 'qr', 'mobile_money', 'bank_transfer']"
+    >
+      <v-btn :color="secondaryColor" dark>Check Out</v-btn>
+    </paystack>
+  </v-container>
 </template>
 
 
-
 <script>
- const publickey = process.env.fv;
+import {mapActions, mapGetters, mapState} from "vuex";
+import user from '@/mixins/user'
+import paystack from 'vue-paystack'
+import rules from "@/mixins/rules";
+
 export default {
   name: "index",
-
-
- methods: {
-    placeOrder() {
-      window.FlutterwaveCheckout({
-        public_key: publickey,
-        tx_ref: "new-sale"+ new Date(),
-        amount: 50,
-        currency: "NGN",
-        country: "NG",
-        payment_options: "card",
-        customer: {
-          email: this.$auth.user.email,
-          name: `${this.$auth.user.firstName} ${this.$auth.user.lastName}`,
-        },
-        callback: function(data) {
-          console.log(data);
-        },
-        onclose: function() {},
-        customizations: {
-          title: "Shophere",
-          description: "Payment for items in cart",
-          logo: "https://github.com/Ahmad940/shophere/blob/master/static/Shophere_logo.png",
-        },
-      });
+  mixins: [user, rules],
+  components: { paystack },
+  data: () => ({
+    formData: {
+      zipCode: '',
+      phone: '',
+      address: '',
+      state: '',
+    }
+  }),
+  computed: {
+  ...mapState('modules/meta', ['appUrl', 'appname', 'secondaryColor', 'primaryColor', 'pay_key']),
+  ...mapGetters('modules/carts', ['CARTS', 'LOADING', 'TOTAL']),
+    genReference(){
+      let text = "";
+      let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      for( let i=0; i < 10; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+      return text;
     },
+  },
+  methods: {
+    ...mapActions('modules/carts', ['fetchCarts']),
+    callback: async function (response) {
+      // console.log(response)
+      const data = {...this.formData}
+      data.firstName = this.getFirstName
+      data.lastName = this.getLastName
+      data.email = this.getEmail
+
+      try {
+        await this.$axios.$delete('/carts/check')
+        this.fetchCarts()
+      } catch (e) {
+        console.log(e.response)
+        console.log(e.message)
+      }
+
+      console.log()
+    },
+    close: function () {
+      console.log("Payment closed")
+    },
+    created() {
+      this.fetchCarts()
+    }
   },
 
   created() {
-    if (typeof document !== `undefined`) {
-      const script = document.createElement("script");
-        script.src = "https://checkout.flutterwave.com/v3.js";
-        document.getElementsByTagName("head")[0].appendChild(script);
-    
-  } else {
-    return {
-      // Do something different while window and document are not defined on the server
-    };
-  }
-      
-      },
+  },
 
 }
 
@@ -64,29 +156,5 @@ export default {
 </script>
 
 <style scoped>
-.card{
-    margin:auto;
-    width: 50%;
-    text-align: center;
-    background-color: rgb(238, 136, 20);
-    padding: 10px 0;
-}
 
-button {
-  padding: 5px;
-  -webkit-appearance: none;
-  border: 2px solid #41b883;
-  background-color: #fff;
-  color: #41b883;
-  font-size: 12px;
-  cursor: pointer;
-}
-button:hover {
-  border-color: #35495e;
-  color: #35495e;
-  font-size: 13px;
-}
-button:focus {
-  outline: none;
-}
 </style>
