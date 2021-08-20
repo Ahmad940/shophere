@@ -76,7 +76,7 @@
 
     </v-row>
     <paystack
-      :amount="TOTAL"
+      :amount="this.nairaToKobo(this.TOTAL)"
       :email="getEmail"
       paystackkey="pk_test_3b1b09aaf1e7eea8e9640b1a964b48c323bec47d"
       :reference="genReference"
@@ -142,6 +142,9 @@ export default {
     close: function () {
       console.log("Payment closed")
     },
+    nairaToKobo (amount){
+    return (amount * 100).toFixed(0)
+  },
     created() {
       this.fetchCarts()
     }
