@@ -1,80 +1,87 @@
 <template>
   <v-container>
     <p class="text-center display-2 pa-5">Check out</p>
-    <v-row>
-      <v-col cols="12" md="6" sm="12">
-        <v-text-field
-          name = "name"
-          outlined
-          :value="getFirstName"
-          label="First Name"
-          dense
-        />
-      </v-col>
-
-      <v-col cols="12" md="6" sm="12">
-        <v-text-field
-          name = "name"
-          outlined
-          :value="getLastName"
-          label="Last Name"
-          dense
-        />
-      </v-col>
-
-      <v-col cols="12" md="6" sm="12">
-        <v-text-field
-          name = "name"
-          outlined
-          :value="getEmail"
-          label="Email Address"
-          dense
-        />
-      </v-col>
-
-
-      <v-col cols="12" md="6" sm="12">
-        <v-text-field
-          name = "name"
-          outlined
-          label="Phone Number"
-          v-model="formData.phone"
-          dense
-        />
-      </v-col>
-
-      <v-col sm="12">
-        <v-textarea
-          outlined
-          label="Shipping Address"
-          v-model="formData.address"
-          dense
-          height="80"
+    <v-form ref="forms">
+      <v-row>
+        <v-col cols="12" md="6" sm="12">
+          <v-text-field
+            name="name"
+            outlined
+            :value="getFirstName"
+            label="First Name"
+            :rule="[fieldRequired]"
+            dense
           />
-      </v-col>
+        </v-col>
 
-      <v-col cols="12" md="6" sm="12">
-        <v-text-field
-          name = "name"
-          outlined
-          label="Zip/Postal Code"
-          v-model="formData.zipCode"
-          dense
-        />
-      </v-col>
+        <v-col cols="12" md="6" sm="12">
+          <v-text-field
+            name="name"
+            outlined
+            :value="getLastName"
+            label="Last Name"
+            :rule="[fieldRequired]"
+            dense
+          />
+        </v-col>
 
-      <v-col cols="12" md="6" sm="12">
-        <v-text-field
-          name = "name"
-          outlined
-          label="State"
-          v-model="formData.state"
-          dense
-        />
-      </v-col>
+        <v-col cols="12" md="6" sm="12">
+          <v-text-field
+            name="name"
+            outlined
+            :rule="[fieldRequired]"
+            :value="getEmail"
+            label="Email Address"
+            dense
+          />
+        </v-col>
 
 
-    </v-row>
+        <v-col cols="12" md="6" sm="12">
+          <v-text-field
+            name="name"
+            outlined
+            label="Phone Number"
+            :rule="[fieldRequired]"
+            v-model="formData.phone"
+            dense
+          />
+        </v-col>
+
+        <v-col sm="12">
+          <v-textarea
+            outlined
+            label="Shipping Address"
+            v-model="formData.address"
+            dense
+            height="80"
+            :rule="[fieldRequired]"
+          />
+        </v-col>
+
+        <v-col cols="12" md="6" sm="12">
+          <v-text-field
+            name="name"
+            outlined
+            :rule="[fieldRequired]"
+            label="Zip/Postal Code"
+            v-model="formData.zipCode"
+            dense
+          />
+        </v-col>
+
+        <v-col cols="12" md="6" sm="12">
+          <v-text-field
+            name="name"
+            outlined
+            :rule="[fieldRequired]"
+            label="State"
+            v-model="formData.state"
+            dense
+          />
+        </v-col>
+      </v-row>
+    </v-form>
     <paystack
       :amount="this.nairaToKobo(this.TOTAL)"
       :email="getEmail"
@@ -100,7 +107,7 @@ import rules from "@/mixins/rules";
 export default {
   name: "index",
   mixins: [user, rules],
-  components: { paystack },
+  components: {paystack},
   data: () => ({
     formData: {
       zipCode: '',
@@ -110,12 +117,12 @@ export default {
     }
   }),
   computed: {
-  ...mapState('modules/meta', ['appUrl', 'appname', 'secondaryColor', 'primaryColor', 'pay_key']),
-  ...mapGetters('modules/carts', ['CARTS', 'LOADING', 'TOTAL']),
-    genReference(){
+    ...mapState('modules/meta', ['appUrl', 'appname', 'secondaryColor', 'primaryColor', 'pay_key']),
+    ...mapGetters('modules/carts', ['CARTS', 'LOADING', 'TOTAL']),
+    genReference() {
       let text = "";
       let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-      for( let i=0; i < 10; i++ )
+      for (let i = 0; i < 10; i++)
         text += possible.charAt(Math.floor(Math.random() * possible.length));
       return text;
     },
@@ -131,7 +138,8 @@ export default {
 
       try {
         await this.$axios.$delete('/carts/check')
-        this.fetchCarts()
+        await this.fetchCarts()
+        await this.$router.push('/cart')
       } catch (e) {
         console.log(e.response)
         console.log(e.message)
